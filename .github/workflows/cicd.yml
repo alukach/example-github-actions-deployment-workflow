@@ -34,7 +34,7 @@ jobs:
 
   deploy-to-production:
     needs: test
-    if: github.ref_name == 'production'
+    if: github.event_name == 'release'
     concurrency: production
     uses: "./.github/workflows/deploy.yml"
     with:
