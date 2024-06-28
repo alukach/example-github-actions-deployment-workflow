@@ -27,7 +27,6 @@ jobs:
       - name: Run tests
         run: |
           echo "Mock testing..."
-          exit 1  # Simulate a failing test
 
   deploy-to-staging:
     needs: test
