@@ -17,9 +17,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Deploy
         run: |
           echo "Deploying to ${{ inputs.environment }} environment"
-          echo "${{ vars.MESSAGE }}"
+          echo "Here's our message environment variable: :${{ vars.MESSAGE }}"
+          echo "This is our API_KEY (it won't be logged for security reasons, but we can prove that it's there and that we can access it): ${{ secrets.API_KEY }}"
