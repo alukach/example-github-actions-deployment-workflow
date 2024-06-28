@@ -11,6 +11,11 @@ on:
         description: "Environment to run deploy"
         type: environment
         required: true
+      force:
+        description: "Deploy even if tests fail"
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   test:
@@ -42,8 +47,8 @@ jobs:
     secrets: inherit
 
   manual-deployment:
-    # needs: test  # NOTE: We elect to skip tests on manual deployments
-    if: github.event_name == 'workflow_dispatch'
+    needs: test
+    if: github.event_name == 'workflow_dispatch' && (success() || inputs.force == true)
     concurrency: ${{ inputs.environment }}
     uses: "./.github/workflows/deploy.yml"
     with:
