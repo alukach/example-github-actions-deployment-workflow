@@ -1,0 +1,28 @@
+# A reusable workflow that deploys the contents of a repository to a target environment.
+
+name: Deploy
+
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        run: |
+          echo "Deploying to ${{ inputs.environment }} environment"
+          echo "${{ vars.MESSAGE }}"
