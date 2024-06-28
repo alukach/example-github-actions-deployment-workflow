@@ -1,0 +1,36 @@
+name: CI/CD Workflow
+
+on:
+  push:
+  release:
+    types:
+      - published
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          echo "TODO: Replace this with actual tests"
+
+  deploy-to-staging:
+    needs: test
+    if: github.ref_name == 'main'
+    concurrency: staging
+    uses: "./.github/workflows/deploy.yml"
+    with:
+      environment: staging
+    secrets: inherit
+
+  deploy-to-production:
+    needs: test
+    if: github.ref_name == 'production'
+    concurrency: production
+    uses: "./.github/workflows/deploy.yml"
+    with:
+      environment: production
+    secrets: inherit

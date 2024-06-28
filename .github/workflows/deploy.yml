@@ -1,6 +1,7 @@
 # A reusable workflow that deploys the contents of a repository to a target environment.
+# https://docs.github.com/en/actions/using-workflows/reusing-workflows#creating-a-reusable-workflow
 
-name: Deploy
+name: Deployment Workflow
 
 permissions:
   id-token: write
