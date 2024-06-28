@@ -3,10 +3,6 @@
 
 name: Deployment Workflow
 
-permissions:
-  id-token: write
-  contents: read
-
 on:
   workflow_call:
     inputs:
