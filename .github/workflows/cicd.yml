@@ -5,21 +5,27 @@ on:
   release:
     types:
       - published
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to run deploy"
+        type: environment
+        required: true
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run tests
         run: |
-          echo "TODO: Replace this with actual tests"
+          echo "Mock testing..."
 
   deploy-to-staging:
     needs: test
-    if: github.ref_name == 'main'
+    if: github.event_name == 'push' && github.ref_name == 'main'
     concurrency: staging
     uses: "./.github/workflows/deploy.yml"
     with:
@@ -33,4 +39,13 @@ jobs:
     uses: "./.github/workflows/deploy.yml"
     with:
       environment: production
+    secrets: inherit
+
+  manual-deployment:
+    # needs: test  # NOTE: We elect to skip tests on manual deployments
+    if: github.event_name == 'workflow_dispatch'
+    concurrency: ${{ inputs.environment }}
+    uses: "./.github/workflows/deploy.yml"
+    with:
+      environment: ${{ inputs.environment }}
     secrets: inherit
