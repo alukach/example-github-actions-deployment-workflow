@@ -1,4 +1,4 @@
-name: CI/CD Workflow 🚀
+name: CI/CD Workflow
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
           echo "Mock testing..."
 
   deploy-to-staging:
-    name: Deploy to Staging
+    name: Deploy to Staging 🚧
     needs: test
     if: github.event_name == 'push' && github.ref_name == 'main'
     concurrency: staging
@@ -40,7 +40,7 @@ jobs:
     secrets: inherit
 
   deploy-to-production:
-    name: Deploy to Production
+    name: Deploy to Production 🌟
     needs: test
     if: github.event_name == 'release'
     concurrency: production
@@ -50,7 +50,7 @@ jobs:
     secrets: inherit
 
   manual-deployment:
-    name: Manual Deployment
+    name: Manual Deployment ❗️
     needs: test
     if: github.event_name == 'workflow_dispatch' && (success() || inputs.force == true)
     concurrency: ${{ inputs.environment }}
