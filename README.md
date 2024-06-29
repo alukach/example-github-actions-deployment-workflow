@@ -2,6 +2,8 @@
 
 This repository demonstrates using GitHub Actions to deploy into either a `staging` or `production` environment.
 
+<img width="743" alt="image" src="https://github.com/alukach/example-github-actions-deployment-workflow/assets/897290/238d2e14-b74b-4f51-9b55-4c01b7085067">
+
 ## Setup
 
 Each deployment environment (i.e., `staging` or `production`) is managed as a [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment). Within each Github Environment, we store environment variables and environment secrets to be used during the deployment process. This demonstration repository only uses a single environment variable (`MESSAGE`) and environment secret (`API_KEY`).
