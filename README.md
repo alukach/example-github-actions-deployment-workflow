@@ -24,6 +24,9 @@ Deployments can be manually triggered from within the Github Actions UI. This al
 
 <img width="936" alt="image" src="https://github.com/alukach/example-github-actions-deployment-workflow/assets/897290/276a5b74-4228-424e-92e1-1edbb970002d">
 
+> [!IMPORTANT]
+> Any user with `WRITE` permissions on the repo can trigger a deployment of any branch to any environment. This can be restricted with by appending a check of the `github.actor` within the `if:` clause of the manual deployment job and restricting write access to `main` (see [this discussion](https://github.com/orgs/community/discussions/26622) for more details).
+
 #### Forcing Deployments
 
 When manually dispatching a deployment, a user can deploy even if tests fail.
